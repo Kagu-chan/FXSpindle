@@ -368,13 +368,101 @@ module Shape
 		
 		figures.each_index { |fi|
 			old_figure, old_size = figures[fi], figures[fi].size
-			new_figure = [], 0
+			new_figure = []
 			
 			old_figure.each_index { |pi|
+				curr_point = old_figure[pi]
+				pre_point = old_figure[pi - 1]
 				
+				new_figure << curr_point if not (curr_point[0] == pre_point[0] && curr_point[1] == pre_point[1])
+			}
+			figures[fi] = new_figure
+		}
+		
+		vec_sizer = lambda { |vector, size|
+			v_arr = vector.to_a
+			len = Math.distance(*v_arr)
+			if len == 0
+				Vector3D.new(0, 0, 0)
+			else
+				v_arr = v_arr.map { |e| e.to_f / len * size }
+				Vector3D.new(*v_arr)
+			end
+		}
+		
+		stroke_figures = {:inner => [], :outer => []}
+		stroke_index = 0
+		
+		figures.each_index { |fi|
+			figure = figures[fi]
+			stroke_index += 1
+			
+			[:inner, :outer].each { |curr|
+				inner = curr == :inner
+				outline = []
+				
+				(inner ? figure.size - 1 : 0).send((inner ? :downto : :upto), (inner ? 0 : figure.size - 1)) { |pi| 
+					point = figure[pi]
+					pre_point, post_point = nil, nil
+					
+					if inner
+						pre_point = figure[(pi + 1) % figure.size]
+						post_point = figure[pi - 1]
+					else
+						post_point = figure[(pi + 1) % figure.size]
+						pre_point = figure[pi - 1]
+					end
+					
+					p_vec = Vector3D.new(0, 0, 1)
+					ortho_1 = vec_sizer.call(
+						Math.ortho(Vector3D.new(
+							point[0] - pre_point[0], 
+							point[1] - pre_point[1], 
+							0
+						), p_vec), 
+						size
+					)
+					ortho_2 = vec_sizer.call(
+						Math.ortho(Vector3D.new(
+							post_point[0] - point[0], 
+							post_point[1] - point[1],
+							0
+						), p_vec), 
+						size
+					)
+					
+					degree = Math.degree(ortho_1, ortho_2)
+					circ = Math.rad(degree).abs * size
+					
+					outline << [(point[0] + ortho_1.x).floor, (point[1] + ortho_1.y).floor]
+					
+					max_circ = 2
+					if circ > max_circ
+						circ_rest = circ % max_circ
+						
+						((circ_rest > 0 and circ_rest or max_circ)..circ).step(max_circ) { |cur_circ|
+							curve_vec = Math.rotate(ortho_1, :z, cur_circ / circ * degree)
+							outline << [(point[0] + curve_vec.x).floor, (point[1] + curve_vec.y).floor]
+						}
+					end
+				}
+				stroke_figures[curr] << outline
 			}
 		}
-		puts figures
+		
+		stroke_shape = []
+		figures.each_index { |fi|
+			[:inner, :outer].each { |curr|
+				outline = stroke_figures[curr][fi-1]
+				
+				outline.each_index { |pi|
+					point = outline[pi - 1]
+					stroke_shape << "#{pi == 0 ? "m" : (pi == 1 ? "l" : "")} #{point[0]} #{point[1]}"
+				}
+				stroke_shape << "#{outline[0][0]} #{outline[0][1]}"
+			}
+		}
+		stroke_shape.join(" ").squeeze(' ')
 	end
 	
 	private_class_method def self.is_valid?(shape)
@@ -498,4 +586,4 @@ module Utils
 	
 end
 
-#Shape.tooutline("m 0 0 l 100 0 100 50 0 50", 5)
+puts Shape.tooutline("m 0 0 l 100 0 100 50 0 50", 5)
