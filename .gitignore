@@ -1,0 +1,9 @@
+# VB Project Files
+*.user
+
+# Binaries
+obj
+src/FXSpindle/bin
+
+# Local testing
+tests
