@@ -10,9 +10,7 @@ int ruby_run_node(void*);
 ]])
 
 -- Test data
-local args = {"test.rb", "lala", "lulu"}
 local args = arg
---print(arg[1])
 
 -- Initialize Ruby
 if ruby.ruby_setup() == 0 then
