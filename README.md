@@ -4,7 +4,7 @@
 **FXSpindle** is an application to create ASS (Advanced Substation Alpha) files with karaoke effects, preview and encode them and manage single projects for this.
 
 ###Environment
-It supports scripting in Ruby or Lua, provides a seperate editor for each scripting language and includes the NyuFX library, the Youtils library and its own library for creating karaoke effects.
+It supports scripting in Ruby or Lua, provides a seperate editor for each scripting language and includes the NyuFX library, the Yutils library and its own library for creating karaoke effects.
 Each library has a port for both scripting engines.
 
 Both environments are extended by many functions and variables to make FXSpindle easier to use and more powerful than simple text manipulation.
@@ -50,8 +50,8 @@ If it is doable and if it fits the library and coding style maybe it will get in
 Please post your issue if you need some help.
 
 ##See also
-* Ruby: https://en.wikipedia.org/wiki/Ruby_(programming_language)
-* Lua: https://en.wikipedia.org/wiki/Lua_(programming_language)
-* NyuFX: https://github.com/Youka/NyuFX/
-* Youtils: https://github.com/Youka/Yutils
-* AviSynth: http://avisynth.nl/index.php/Main_Page
+* Ruby: https://www.ruby-lang.org
+* Lua: http://www.lua.org
+* NyuFX: https://github.com/Youka/NyuFX
+* Yutils: https://github.com/Youka/Yutils
+* AviSynth: http://avisynth.nl
