@@ -72,10 +72,6 @@
     <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="lua513net, Version=1.0.3023.20398, Culture=neutral, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>.\lua513net.dll</HintPath>
-    </Reference>
     <Reference Include="ScintillaNET">
       <HintPath>C:\Program Files\ScintillaNET v2.6\ScintillaNET.dll</HintPath>
     </Reference>

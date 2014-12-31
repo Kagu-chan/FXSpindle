@@ -3,9 +3,6 @@ Option Explicit On
 Option Infer On
 Option Strict On
 
-Imports luanet
-Imports luanet.lua51
-
 Module Interpreters
 
     Private _notAvailable As New InterpreterAvailableState With {.Available = False}
@@ -70,39 +67,43 @@ Module Interpreters
     End Function
 
     Public Function RubyInterpreterAvailable() As InterpreterAvailableState
-        Dim path As String = IO.Path.Combine(AppState.Config.I.RubyExecutablePath)
-        Dim out As String = String.Empty
+        'Dim path As String = IO.Path.Combine(AppState.Config.I.RubyExecutablePath)
+        'Dim out As String = String.Empty
 
-        If String.IsNullOrEmpty(path) Then Return _notAvailable
-        Try
-            Dim p As New Process
+        'If String.IsNullOrEmpty(path) Then Return _notAvailable
+        'Try
+        '    Dim p As New Process
 
-            With p
-                .StartInfo.CreateNoWindow = True
-                .StartInfo.UseShellExecute = False
-                .StartInfo.RedirectStandardOutput = True
-                .StartInfo.FileName = path
-                .StartInfo.Arguments = "-e ""puts RUBY_VERSION"""
-                .Start()
-                out = .StandardOutput.ReadToEnd()
-                MsgBox(out)
-            End With
-        Catch ex As Exception
-            Return _notAvailable
-        End Try
-        Return New InterpreterAvailableState With {.Version = out, .Available = True}
+        '    With p
+        '        .StartInfo.CreateNoWindow = True
+        '        .StartInfo.UseShellExecute = False
+        '        .StartInfo.RedirectStandardOutput = True
+        '        .StartInfo.FileName = path
+        '        .StartInfo.Arguments = "-e ""puts RUBY_VERSION"""
+        '        .Start()
+        '        out = .StandardOutput.ReadToEnd()
+        '        MsgBox(out)
+        '    End With
+        'Catch ex As Exception
+
+        'End Try
+        'Return New InterpreterAvailableState With {.Version = out, .Available = True}
+
+        Return _notAvailable
     End Function
 
     Public Function LuaInterpreterAvailable() As InterpreterAvailableState
-        Dim state As New InterpreterAvailableState
-        Try
-            Dim [lib] As New lua51
-            Dim version As String = [lib].GetGlobal("_VERSION").ToString
-            state.Version = version.Substring(4)
-            state.Available = True
-        Catch ex As Exception
-            state.Available = False
-        End Try
-        Return state
+        Return _notAvailable
+
+        'Dim state As New InterpreterAvailableState
+        'Try
+        '    Dim [lib] As New lua51
+        '    Dim version As String = [lib].GetGlobal("_VERSION").ToString
+        '    state.Version = version.Substring(4)
+        '    state.Available = True
+        'Catch ex As Exception
+        '    state.Available = False
+        'End Try
+        'Return state
     End Function
 End Module
