@@ -26,32 +26,14 @@ Module Interpreters
         End With
         AppState.App.I.AvailableInterpreters.Add("LuaAV", luaInterpreter)
 
-        Dim rbkl As New Interpreter
-        With rbkl
-            .CheckAvailable = AddressOf CheckRuby_KaguLib
-            .Name = "RBKL"
-            .ViewName = "Ruby KaraLib"
-            .InterpreterType = InterpreterType.Ruby
-        End With
-        AppState.App.I.AvailableInterpreters.Add("RBKL", rbkl)
-
-        Dim luakl As New Interpreter
-        With luakl
-            .CheckAvailable = AddressOf CheckLua_KaguLib
-            .Name = "LUAKL"
-            .ViewName = "Lua KaraLib"
-            .InterpreterType = InterpreterType.Lua
-        End With
-        AppState.App.I.AvailableInterpreters.Add("LUAKL", luakl)
-
-        Dim luanyul As New Interpreter
-        With luanyul
-            .CheckAvailable = AddressOf CheckLua_NyuLib
-            .Name = "LUANYUL"
-            .ViewName = "Youkas NyuFX"
-            .InterpreterType = InterpreterType.Lua
-        End With
-        AppState.App.I.AvailableInterpreters.Add("LUANYUL", luanyul)
+        'Dim luanyul As New Interpreter
+        'With luanyul
+        '    .CheckAvailable = AddressOf CheckLua_NyuLib
+        '    .Name = "LUANYUL"
+        '    .ViewName = "Youkas NyuFX"
+        '    .InterpreterType = InterpreterType.Lua
+        'End With
+        'AppState.App.I.AvailableInterpreters.Add("LUANYUL", luanyul)
     End Sub
 
     Public Function CheckRuby_KaguLib() As InterpreterAvailableState
@@ -67,43 +49,31 @@ Module Interpreters
     End Function
 
     Public Function RubyInterpreterAvailable() As InterpreterAvailableState
-        'Dim path As String = IO.Path.Combine(AppState.Config.I.RubyExecutablePath)
-        'Dim out As String = String.Empty
-
-        'If String.IsNullOrEmpty(path) Then Return _notAvailable
-        'Try
-        '    Dim p As New Process
-
-        '    With p
-        '        .StartInfo.CreateNoWindow = True
-        '        .StartInfo.UseShellExecute = False
-        '        .StartInfo.RedirectStandardOutput = True
-        '        .StartInfo.FileName = path
-        '        .StartInfo.Arguments = "-e ""puts RUBY_VERSION"""
-        '        .Start()
-        '        out = .StandardOutput.ReadToEnd()
-        '        MsgBox(out)
-        '    End With
-        'Catch ex As Exception
-
-        'End Try
-        'Return New InterpreterAvailableState With {.Version = out, .Available = True}
+        Dim resultVersion = Console.RunNodeAndReturn("script/bin/ruby.exe", {"script/bin/version.rb"})
 
         Return _notAvailable
+
+        ' Ruby currently not available since they are failures in msvcrt-ruby210 dll
+
+
+        'Try
+        '    Console.RunNodeAndReturn("script/bin/luajit32.exe", {"script/bin/interpreter.lua", "script/bin/version.rb"})
+        'Catch ex As Exception
+        '    MsgBox(ex.Message)
+        '    Return _notAvailable
+        'End Try
+        'Return _notAvailable
     End Function
 
     Public Function LuaInterpreterAvailable() As InterpreterAvailableState
+        Try
+            Console.RunNodeAndReturn("script/bin/luajit32.exe", {"script/bin/version.lua"})
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Return _notAvailable
+        End Try
+
         Return _notAvailable
 
-        'Dim state As New InterpreterAvailableState
-        'Try
-        '    Dim [lib] As New lua51
-        '    Dim version As String = [lib].GetGlobal("_VERSION").ToString
-        '    state.Version = version.Substring(4)
-        '    state.Available = True
-        'Catch ex As Exception
-        '    state.Available = False
-        'End Try
-        'Return state
     End Function
 End Module
