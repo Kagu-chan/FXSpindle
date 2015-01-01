@@ -89,7 +89,7 @@ function convert.text_to_pixels(text, style, off_x, off_y)
 			off_x < 0 or off_x > 1 or off_y < 0 or off_y > 1 then
 		error("Valid number and number expected for optional `off_x' and `off_y'", 2)
 	end
-	
+	--Wenn Nummern nil sin nicht filtern!
 	local filtered_shape = wrapper_call(
 		shape.filter, 
 		wrapper_call(convert.text_to_shape, text, style),
@@ -113,7 +113,7 @@ function convert.image_to_pixels(image)
 	
 	for y = 1, height do
 		for x = 1, width do
-			local pixel = pixels.data[offset]
+			local pixel = packed_data[offset]
 			pixel.x = x
 			pixel.y = y
 			pixel.alpha = pixel.a
