@@ -10,21 +10,45 @@ wrapper = {
 		line.text = line.text_stripped
 		line.intlead = line.internal_leading
 		line.extlead = line.external_leading
+		
+		line.x = tonumber(line.x)
+		line.right = tonumber(line.right)
+		line.left = tonumber(line.left)
+		line.center = tonumber(line.center)
+		line.width = tonumber(line.width)
 	end,
 	
 	fix_syl = function(syl)
 		syl.intlead = syl.internal_leading
 		syl.extlead = syl.external_leading
+		
+		syl.x = tonumber(syl.x)
+		syl.right = tonumber(syl.right)
+		syl.left = tonumber(syl.left)
+		syl.center = tonumber(syl.center)
+		syl.width = tonumber(syl.width)
 	end,
 	
 	fix_word = function(word)
 		word.intlead = word.internal_leading
 		word.extlead = word.external_leading
+		
+		word.x = tonumber(word.x)
+		word.right = tonumber(word.right)
+		word.left = tonumber(word.left)
+		word.center = tonumber(word.center)
+		word.width = tonumber(word.width)
 	end,
 	
 	fix_char = function(char_)
 		char_.intlead = char_.internal_leading
 		char_.extlead = char_.external_leading
+		
+		char_.x = tonumber(char_.x)
+		char_.right = tonumber(char_.right)
+		char_.left = tonumber(char_.left)
+		char_.center = tonumber(char_.center)
+		char_.width = tonumber(char_.width)
 	end,
 	
 	trim = function(text)
