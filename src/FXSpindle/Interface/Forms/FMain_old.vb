@@ -3,7 +3,7 @@ Option Explicit On
 Option Infer On
 Option Strict On
 
-Public Class Main
+Public Class FMain_old
 
     Private _createdTabs As New List(Of String)
     Private _titles As New Dictionary(Of String, String)
@@ -15,12 +15,12 @@ Public Class Main
 
         ' Own instanciating
         AddHandlers()
-        EnvironmentManager.CheckAndManifestEnvironment()
+
         If Not Configuring.ConfigValid Then
             Me.TCMain.SelectTab("TPOptions")
         End If
         If Configuring.ConfigExists Then
-            Configuring.LoadConfig()
+            Configuring.SaveConfig()
         End If
 
         With _titles
@@ -28,16 +28,10 @@ Public Class Main
             .Add("TPProjects", "Projekte")
             .Add("TPEditor", "Editor")
             .Add("TPOptions", "Optionen")
-            .Add("TPVideoView", "Test")
+            .Add("TPVideoView", "Video-Vorschau")
         End With
 
         OnSelectedTabChanged(Nothing, EventArgs.Empty)
-        Interpreters.Load()
-
-        'Me.TCMain.SelectTab("TPEditor")
-        'Dim ctrl As New EditorControl
-        'TPEditor.Controls.Add(ctrl)
-        '_createdTabs.Add("TPEditor")
     End Sub
 
     Private Sub AddHandlers()
@@ -86,20 +80,16 @@ Public Class Main
         If Not _createdTabs.Contains(tabName) Then
             Select Case tabName
                 Case "TPHome"
-                    Dim ctrl As New TestControl
-                    TPHome.Controls.Add(ctrl)
+                    TPHome.Controls.Add(AppState.Controls.I.Get("_testControl"))
                     Exit Select
                 Case "TPOptions"
-                    Dim ctrl As New OptionsControl
-                    TPOptions.Controls.Add(ctrl)
+                    TPOptions.Controls.Add(AppState.Controls.I.Get("_optionsControl"))
                     Exit Select
                 Case "TPEditor"
-                    Dim ctrl As New EditorControl
-                    TPEditor.Controls.Add(ctrl)
+                    TPEditor.Controls.Add(AppState.Controls.I.Get("_editorsControl"))
                     Exit Select
                 Case "TPVideoView"
-                    Dim ctrl As New VideoPreviewControl
-                    TPVideoView.Controls.Add(ctrl)
+                    TPVideoView.Controls.Add(AppState.Controls.I.Get("_videoPreviewControl"))
                     Exit Select
             End Select
             _createdTabs.Add(tabName)

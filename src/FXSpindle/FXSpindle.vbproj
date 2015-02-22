@@ -8,9 +8,10 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{CD1DAC17-F2B5-4A7C-87F7-3598D793BCB8}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <StartupObject>Ruby_KaraInterpreter.My.MyApplication</StartupObject>
-    <RootNamespace>Ruby_KaraInterpreter</RootNamespace>
-    <AssemblyName>Ruby KaraInterpreter</AssemblyName>
+    <StartupObject>My.MyApplication</StartupObject>
+    <RootNamespace>
+    </RootNamespace>
+    <AssemblyName>FXSpindle</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsForms</MyType>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
@@ -39,7 +40,7 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\Debug\</OutputPath>
-    <DocumentationFile>Ruby KaraInterpreter.xml</DocumentationFile>
+    <DocumentationFile>FXSpindle.xml</DocumentationFile>
     <NoWarn>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</NoWarn>
     <WarningsAsErrors>
     </WarningsAsErrors>
@@ -51,7 +52,7 @@
     <DefineTrace>true</DefineTrace>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DocumentationFile>Ruby KaraInterpreter.xml</DocumentationFile>
+    <DocumentationFile>FXSpindle.xml</DocumentationFile>
     <NoWarn>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</NoWarn>
     <WarningsAsErrors>
     </WarningsAsErrors>
@@ -72,8 +73,15 @@
     <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AxInterop.AXVLC">
+      <HintPath>..\..\deps\AxInterop.AXVLC.dll</HintPath>
+    </Reference>
+    <Reference Include="Interop.AXVLC">
+      <HintPath>..\..\deps\Interop.AXVLC.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="ScintillaNET">
-      <HintPath>C:\Program Files\ScintillaNET v2.6\ScintillaNET.dll</HintPath>
+      <HintPath>..\..\deps\ScintillaNET.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -111,13 +119,21 @@
     <Compile Include="Businness\ObservalbeDictionary.vb" />
     <Compile Include="Businness\StateElements\App.vb" />
     <Compile Include="Businness\StateElements\Config.vb" />
+    <Compile Include="Businness\StateElements\Controls.vb" />
     <Compile Include="Businness\StateElements\Editors.vb" />
+    <Compile Include="Businness\StateElements\Remember.vb" />
     <Compile Include="Businness\StateElements\Video.vb" />
     <Compile Include="Businness\Structures.vb" />
     <Compile Include="Interface\Controls\AvailableInterpreters.Designer.vb">
       <DependentUpon>AvailableInterpreters.vb</DependentUpon>
     </Compile>
     <Compile Include="Interface\Controls\AvailableInterpreters.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Interface\Controls\BigMenuButton.Designer.vb">
+      <DependentUpon>BigMenuButton.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Interface\Controls\BigMenuButton.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Interface\Controls\EncodeViewer.Designer.vb">
@@ -180,11 +196,17 @@
     <Compile Include="Interface\FormControls\VideoPreviewControl.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Interface\Forms\Main.vb">
+    <Compile Include="Interface\Forms\FMain.Designer.vb">
+      <DependentUpon>FMain.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Interface\Forms\FMain.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Interface\Forms\Main.Designer.vb">
-      <DependentUpon>Main.vb</DependentUpon>
+    <Compile Include="Interface\Forms\FMain_old.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Interface\Forms\FMain_old.Designer.vb">
+      <DependentUpon>FMain_old.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Interface\FormControls\OptionsControl.Designer.vb">
@@ -198,6 +220,12 @@
     </Compile>
     <Compile Include="Interface\Controls\ResourcesView.vb">
       <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Interface\Forms\FSplash.Designer.vb">
+      <DependentUpon>FSplash.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Interface\Forms\FSplash.vb">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
@@ -218,6 +246,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Interface\Controls\AvailableInterpreters.resx">
       <DependentUpon>AvailableInterpreters.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Interface\Controls\BigMenuButton.resx">
+      <DependentUpon>BigMenuButton.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Interface\Controls\EncodeViewer.resx">
       <DependentUpon>EncodeViewer.vb</DependentUpon>
@@ -249,14 +280,20 @@
     <EmbeddedResource Include="Interface\FormControls\VideoPreviewControl.resx">
       <DependentUpon>VideoPreviewControl.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Interface\Forms\Main.resx">
-      <DependentUpon>Main.vb</DependentUpon>
+    <EmbeddedResource Include="Interface\Forms\FMain.resx">
+      <DependentUpon>FMain.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Interface\Forms\FMain_old.resx">
+      <DependentUpon>FMain_old.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Interface\FormControls\OptionsControl.resx">
       <DependentUpon>OptionsControl.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Interface\Controls\ResourcesView.resx">
       <DependentUpon>ResourcesView.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Interface\Forms\FSplash.resx">
+      <DependentUpon>FSplash.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
@@ -299,25 +336,6 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
-  </ItemGroup>
-  <ItemGroup>
-    <COMReference Include="AxAXVLC">
-      <Guid>{DF2BBE39-40A8-433B-A279-073F48DA94B6}</Guid>
-      <VersionMajor>1</VersionMajor>
-      <VersionMinor>0</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>aximp</WrapperTool>
-      <Isolated>False</Isolated>
-    </COMReference>
-    <COMReference Include="AXVLC">
-      <Guid>{DF2BBE39-40A8-433B-A279-073F48DA94B6}</Guid>
-      <VersionMajor>1</VersionMajor>
-      <VersionMinor>0</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>tlbimp</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
