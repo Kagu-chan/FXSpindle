@@ -126,7 +126,7 @@ end
 
 -- MATH
 function math.bezier(pct, point_table)
-	return wrapper_call(Yutils.math.bezier, pct, point_table)
+	return {wrapper_call(Yutils.math.bezier, pct, point_table)}
 end
 
 function math.degree(vec1, vec2)
