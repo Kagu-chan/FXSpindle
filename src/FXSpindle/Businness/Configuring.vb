@@ -18,14 +18,13 @@ Public Class Configuring
         Return IO.File.Exists(IO.Path.Combine(EnvironmentManager.SettingsPath, "Config.ini"))
     End Function
 
-    Public Shared Sub ValidateAndSave()
+    Public Shared Sub SaveConfig()
         With AppState.Config.I
             _iniLib.WriteValue("Settings", "UseCreditsName", .UseCreditsName)
             _iniLib.WriteValue("Settings", "CreditsName", .CreditsName)
             _iniLib.WriteValue("Settings", "ShowLastEvents", .ShowLastEvents)
             _iniLib.WriteValue("Settings", "ShowRessourceHandle", .ShowRessourceHandle)
             _iniLib.WriteValue("Settings", "ShowEncodeState", .ShowEncodeState)
-            _iniLib.WriteValue("Settings", "RubyExecutablePath", .RubyExecutablePath)
         End With
         _iniLib.WriteValue("Settings", "Version", AppState.App.I.Version)
     End Sub
@@ -37,7 +36,6 @@ Public Class Configuring
             .ShowLastEvents = _iniLib.ReadValue("Settings", "ShowLastEvents", .ShowLastEvents)
             .ShowRessourceHandle = _iniLib.ReadValue("Settings", "ShowRessourceHandle", .ShowRessourceHandle)
             .ShowEncodeState = _iniLib.ReadValue("Settings", "ShowEncodeState", .ShowEncodeState)
-            .RubyExecutablePath = _iniLib.ReadValue("Settings", "RubyExecutablePath", .RubyExecutablePath)
         End With
         AppState.App.I.RaiseOptionWindowRequireReload()
     End Sub

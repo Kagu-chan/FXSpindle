@@ -22,9 +22,9 @@ Partial Class OptionsControl
     'Das Bearbeiten mit dem Code-Editor ist nicht möglich.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.MiscOptions1 = New Ruby_KaraInterpreter.MiscOptions()
-        Me.AvailableInterpreters1 = New Ruby_KaraInterpreter.AvailableInterpreters()
-        Me.PathOptions1 = New Ruby_KaraInterpreter.PathOptions()
+        Me.MiscOptions1 = New MiscOptions()
+        Me.AvailableInterpreters1 = New AvailableInterpreters()
+        Me.PathOptions1 = New PathOptions()
         Me.SuspendLayout()
         '
         'MiscOptions1
@@ -62,8 +62,8 @@ Partial Class OptionsControl
         Me.ResumeLayout(False)
 
     End Sub
-    Friend WithEvents AvailableInterpreters1 As Ruby_KaraInterpreter.AvailableInterpreters
-    Friend WithEvents MiscOptions1 As Ruby_KaraInterpreter.MiscOptions
-    Friend WithEvents PathOptions1 As Ruby_KaraInterpreter.PathOptions
+    Friend WithEvents AvailableInterpreters1 As AvailableInterpreters
+    Friend WithEvents MiscOptions1 As MiscOptions
+    Friend WithEvents PathOptions1 As PathOptions
 
 End Class
