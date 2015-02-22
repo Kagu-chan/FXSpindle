@@ -10,7 +10,7 @@ Public Class EnvironmentManager
     Public Shared ReadOnly Property AppPath As String
         Get
             Dim path As String = GetFolderPath(SpecialFolder.ApplicationData)
-            Return IO.Path.Combine(path, "Ruby KaraInterpreter")
+            Return IO.Path.Combine(path, "FXSpindle")
         End Get
     End Property
 

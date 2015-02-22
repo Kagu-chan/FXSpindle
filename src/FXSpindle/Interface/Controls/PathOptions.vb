@@ -23,7 +23,7 @@ Public Class PathOptions
         AddHandler TBRubyExecutable.TextChanged,
             Sub()
                 AppState.Config.I.RubyExecutablePath = TBRubyExecutable.Text
-                Configuring.ValidateAndSave()
+                Configuring.SaveConfig()
             End Sub
         AddHandler AppState.App.I.OptionWindowRequireReload,
             Sub()

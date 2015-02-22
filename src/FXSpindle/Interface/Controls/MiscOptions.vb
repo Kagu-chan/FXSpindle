@@ -15,27 +15,27 @@ Public Class MiscOptions
             Sub()
                 AppState.Config.I.UseCreditsName = CBWriteName.Checked
                 TBName.Enabled = CBWriteName.Checked
-                Configuring.ValidateAndSave()
+                Configuring.SaveConfig()
             End Sub
         AddHandler CBShowLastEvents.CheckedChanged,
             Sub()
                 AppState.Config.I.ShowLastEvents = CBShowLastEvents.Checked
-                Configuring.ValidateAndSave()
+                Configuring.SaveConfig()
             End Sub
         AddHandler CBShowResourceUsage.CheckedChanged,
             Sub()
                 AppState.Config.I.ShowRessourceHandle = CBShowResourceUsage.Checked
-                Configuring.ValidateAndSave()
+                Configuring.SaveConfig()
             End Sub
         AddHandler CBShowEncodeState.CheckedChanged,
             Sub()
                 AppState.Config.I.ShowEncodeState = CBShowEncodeState.Checked
-                Configuring.ValidateAndSave()
+                Configuring.SaveConfig()
             End Sub
         AddHandler TBName.TextChanged,
             Sub()
                 AppState.Config.I.CreditsName = TBName.Text
-                Configuring.ValidateAndSave()
+                Configuring.SaveConfig()
             End Sub
         AddHandler AppState.App.I.OptionWindowRequireReload,
             Sub()
