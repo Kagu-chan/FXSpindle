@@ -15,7 +15,6 @@ Public Class RubyEditor
         _tweaks = New EditorTweaks(Me.SEditor)
         _tweaks.AddHandlers()
         _tweaks.SetCommentCommands("#", "=begin", "=end")
-        _tweaks.SetBaseSyntax("def", "end")
         _tweaks.SetWords({
             "BEGIN class ensure nil self " + _
             "when END def false not " + _
@@ -46,6 +45,11 @@ Public Class RubyEditor
 
         _tweaks.SetBackColor("#FFFFCC", "DEFNAME")
         _tweaks.SetBackColor("#FFFFCC", "REGEX")
+
+        AddHandler AppState.Editors.I.RunRuby,
+            Sub()
+
+            End Sub
 
         AddHandler AppState.Editors.I.TransportToRuby, AddressOf _tweaks.ImportTransport
     End Sub

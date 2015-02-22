@@ -15,7 +15,6 @@ Public Class LuaEditor
         _tweaks = New EditorTweaks(Me.SEditor)
         _tweaks.AddHandlers()
         _tweaks.SetCommentCommands("--", "--[[", "]]")
-        _tweaks.SetBaseSyntax("local function", "end")
         _tweaks.SetWords({
             "function for while repeat until if else elseif end break return in do then",
             "local",
@@ -44,8 +43,7 @@ Public Class LuaEditor
 
         AddHandler AppState.Editors.I.RunLua,
             Sub()
-                MsgBox(_tweaks.GetParseString())
-                '_interpreter.DoString(code)
+                
             End Sub
 
         AddHandler AppState.Editors.I.TransportToLua, AddressOf _tweaks.ImportTransport

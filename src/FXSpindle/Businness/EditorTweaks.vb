@@ -44,13 +44,6 @@ Public Class EditorTweaks
         End With
     End Sub
 
-    Public Sub SetBaseSyntax(ByVal voidStart As String, ByVal voidEnd As String)
-        _control.Text = _
-            _control.Lexing.LineCommentPrefix & " This is the main function and scripts entry point. Dont directly call code outside of this function." & _
-            vbNewLine & _control.Lexing.LineCommentPrefix & "   Code outside of it will called before values are rehashed!" & _
-            vbNewLine & voidStart & " main()" & vbNewLine & "  " & vbNewLine & voidEnd
-    End Sub
-
     Public Sub SetWords(ByVal words() As String)
         Dim i As Integer = 0
         For Each list As String In words
