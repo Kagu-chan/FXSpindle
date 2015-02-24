@@ -21,15 +21,15 @@ Namespace AppState
             'NOP
         End Sub
 
-        Private _iniLib As IniLib = New IniLib(IO.Path.Combine(EnvironmentManager.SettingsPath, "Config.ini"))
+        'Private _iniLib As IniLib = New IniLib(IO.Path.Combine(EnvironmentManager.SettingsPath, "Config.ini"))
         Private _section As String = "RememberMe"
 
         Public Property LastOpenEditor As Integer
             Get
-                Return _iniLib.ReadValue(_section, "LastOpenEditor", 0)
+                'Return _iniLib.ReadValue(_section, "LastOpenEditor", 0)
             End Get
             Set(ByVal value As Integer)
-                _iniLib.WriteValue(_section, "LastOpenEditor", value)
+                '_iniLib.WriteValue(_section, "LastOpenEditor", value)
             End Set
         End Property
 
