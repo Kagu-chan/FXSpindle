@@ -1,4 +1,4 @@
-print("LuaJit Version" .. _VERSION)
+print("LuaJit Version " .. _VERSION)
 
 -- Read command line arguments
 if (arg[1] and arg[2] and arg[3] and arg[4] and arg[5]) then
