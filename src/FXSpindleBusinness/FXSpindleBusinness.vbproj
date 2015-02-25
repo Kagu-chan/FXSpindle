@@ -9,7 +9,8 @@
     </SchemaVersion>
     <ProjectGuid>{98D5C002-E8FB-482A-8506-6E6657D6AFE1}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>FXSpindleBusinness</RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <AssemblyName>FXSpindleBusinness</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>Windows</MyType>

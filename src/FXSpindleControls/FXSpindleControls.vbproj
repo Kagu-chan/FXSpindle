@@ -9,7 +9,8 @@
     </SchemaVersion>
     <ProjectGuid>{9E509457-74E9-4C03-9CB6-2A6C4517ABB0}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>FXSpindleControls</RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <AssemblyName>FXSpindleControls</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>Windows</MyType>

@@ -8,8 +8,9 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{65B67718-761D-4A2D-9D92-C3B76B600FF6}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <StartupObject>FXSpindleRenderer.My.MyApplication</StartupObject>
-    <RootNamespace>FXSpindleRenderer</RootNamespace>
+    <StartupObject>My.MyApplication</StartupObject>
+    <RootNamespace>
+    </RootNamespace>
     <AssemblyName>FXSpindleRenderer</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsForms</MyType>
