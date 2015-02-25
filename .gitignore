@@ -7,3 +7,6 @@ src/FXSpindle/bin
 
 # Local testing
 tests
+
+# Local Backups
+backup
