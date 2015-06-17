@@ -3,6 +3,9 @@
 ##Definition
 **FXSpindle** is an application to create ASS (Advanced Substation Alpha) files with karaoke effects, preview and encode them and manage single projects for this.
 
+##Project Paused!
+Please refer to [AegiSpindle](https://github.com/Kagurame/AegiSpindle) for updates and new source!
+
 ###Environment
 It supports scripting in Ruby or Lua, provides a seperate editor for each scripting language and includes the NyuFX library, the Yutils library and its own library for creating karaoke effects.
 Each library has a port for both scripting engines.
