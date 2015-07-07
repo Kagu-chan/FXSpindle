@@ -53,18 +53,30 @@ local function utf16_to_utf8(ws)
 	return ffi.string(s)
 end
 return function(dir_name)
-	local find_data = ffi.new("WIN32_FIND_DATAW[1]")
-	local dir_handle = ffi.gc(ffi.C.FindFirstFileW(utf8_to_utf16(dir_name.."\\*"), find_data), ffi.C.FindClose)
-	if not dir_handle then
-		error("Couldn't find directory!", 2)
+	if ffi.os == "Windows" then
+		local find_data = ffi.new("WIN32_FIND_DATAW[1]")
+		local dir_handle = ffi.gc(ffi.C.FindFirstFileW(utf8_to_utf16(dir_name.."\\*"), find_data), ffi.C.FindClose)
+		if not dir_handle then
+			error("Couldn't find directory!", 2)
+		end
+		local files = {n = 0}
+		repeat
+			files.n = files.n + 1
+			files[files.n] = {
+				name = utf16_to_utf8(find_data[0].cFileName),
+				type = find_data[0].dwFileAttributes == ffi.C.FILE_ATTRIBUTE_DIRECTORY and "directory" or "file"
+			}
+		until ffi.C.FindNextFileW(dir_handle, find_data) == 0
+		return files
+	else
+		local result = { n=0 }
+		local p = io.popen('find "'.. dir_name ..'" -type f')
+		for file in p:lines() do
+			local f = { name = file:gsub(dir_name .. "/", ""), type="file" }
+			result.n = result.n + 1
+			result[result.n] = f
+		end
+		
+		return result
 	end
-	local files = {n = 0}
-	repeat
-		files.n = files.n + 1
-		files[files.n] = {
-			name = utf16_to_utf8(find_data[0].cFileName),
-			type = find_data[0].dwFileAttributes == ffi.C.FILE_ATTRIBUTE_DIRECTORY and "directory" or "file"
-		}
-	until ffi.C.FindNextFileW(dir_handle, find_data) == 0
-	return files
 end
