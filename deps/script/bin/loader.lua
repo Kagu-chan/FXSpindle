@@ -34,11 +34,11 @@ end
 
 _G.command_line_args = {}
 
-command_line_args.autoload_dir = 		arg[1]
-command_line_args.global_user_autoload =	argument_format == 1 and arg[2] or "empty"
-command_line_args.library_user_autoload =	argument_format == 1 and arg[3] or "empty"
-command_line_args.working_dir = 		argument_format == 1 and arg[4] or arg[2]
-command_line_args.filebase = 			argument_format == 1 and arg[5] or arg[3]
+command_line_args.autoload_dir			= arg[1]
+command_line_args.global_user_autoload	= argument_format == 1 and arg[2] or "empty"
+command_line_args.library_user_autoload	= argument_format == 1 and arg[3] or "empty"
+command_line_args.working_dir			= argument_format == 1 and arg[4] or arg[2]
+command_line_args.filebase				= argument_format == 1 and arg[5] or arg[3]
 
 -- Autoload the autoload directory content (*.lua)
 load_dir("libraries/" .. command_line_args.autoload_dir)
