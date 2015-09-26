@@ -2516,7 +2516,7 @@ Yutils = {
 						end
 						-- Add durations between dialogs
 						for _, dialogs in pairs(dialog_styles) do
-							table.sort(dialogs, function(dialog1, dialog2) return dialog1.start_time <= dialog2.start_time end)
+							table.sort(dialogs, function(dialog1, dialog2) return dialog1.start_time < dialog2.start_time end)
 							for i=1, dialogs.n do
 								dialog = dialogs[i]
 								dialog.leadin = i == 1 and 1000.1 or dialog.start_time - dialogs[i-1].end_time
