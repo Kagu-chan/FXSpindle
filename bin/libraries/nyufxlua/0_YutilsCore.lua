@@ -2270,60 +2270,23 @@ Yutils = {
 								end
 								-- Calculate sylable positions with all sylables data already available
 								if dialog.syls.n > 0 and dialog.syls[1].width and meta.play_res_x > 0 and meta.play_res_y > 0 then
-									if dialog.styleref.alignment > 6 or dialog.styleref.alignment < 4 then
-										local cur_x = dialog.left
-										for i=1, dialog.syls.n do
-											syl = dialog.syls[i]
-											-- Horizontal position
-											cur_x = cur_x + syl.prespace * space_width
-											syl.left = cur_x
-											syl.center = syl.left + syl.width / 2
-											syl.right = syl.left + syl.width
-											syl.x = (dialog.styleref.alignment-1) % 3 == 0 and syl.left or
-													(dialog.styleref.alignment-2) % 3 == 0 and syl.center or
-													syl.right
-											cur_x = cur_x + syl.width + syl.postspace * space_width
-											-- Vertical position
-											syl.top = dialog.top
-											syl.middle = dialog.middle
-											syl.bottom = dialog.bottom
-											syl.y = dialog.y
-										end
-									else
-										local max_width, sum_height = 0, 0
-										for i=1, dialog.syls.n do
-											syl = dialog.syls[i]
-											max_width = math.max(max_width, syl.width)
-											sum_height = sum_height + syl.height
-										end
-										local cur_y, x_fix = meta.play_res_y / 2 - sum_height / 2
-										for i=1, dialog.syls.n do
-											syl = dialog.syls[i]
-											-- Horizontal position
-											x_fix = (max_width - syl.width) / 2
-											if dialog.styleref.alignment == 4 then
-												syl.left = dialog.left + x_fix
-												syl.center = syl.left + syl.width / 2
-												syl.right = syl.left + syl.width
-												syl.x = syl.left
-											elseif dialog.styleref.alignment == 5 then
-												syl.left = meta.play_res_x / 2 - syl.width / 2
-												syl.center = syl.left + syl.width / 2
-												syl.right = syl.left + syl.width
-												syl.x = syl.center
-											else -- dialog.styleref.alignment == 6
-												syl.left = dialog.right - syl.width - x_fix
-												syl.center = syl.left + syl.width / 2
-												syl.right = syl.left + syl.width
-												syl.x = syl.right
-											end
-											-- Vertical position
-											syl.top = cur_y
-											syl.middle = syl.top + syl.height / 2
-											syl.bottom = syl.top + syl.height
-											syl.y = syl.middle
-											cur_y = cur_y + syl.height
-										end
+									local cur_x = dialog.left
+									for i=1, dialog.syls.n do
+										syl = dialog.syls[i]
+										-- Horizontal position
+										cur_x = cur_x + syl.prespace * space_width
+										syl.left = cur_x
+										syl.center = syl.left + syl.width / 2
+										syl.right = syl.left + syl.width
+										syl.x = (dialog.styleref.alignment-1) % 3 == 0 and syl.left or
+												(dialog.styleref.alignment-2) % 3 == 0 and syl.center or
+												syl.right
+										cur_x = cur_x + syl.width + syl.postspace * space_width
+										-- Vertical position
+										syl.top = dialog.top
+										syl.middle = dialog.middle
+										syl.bottom = dialog.bottom
+										syl.y = dialog.y
 									end
 								end
 							end
@@ -2351,60 +2314,23 @@ Yutils = {
 								end
 								-- Calculate word positions with all words data already available
 								if dialog.words.n > 0 and dialog.words[1].width and meta.play_res_x > 0 and meta.play_res_y > 0 then
-									if dialog.styleref.alignment > 6 or dialog.styleref.alignment < 4 then
-										local cur_x = dialog.left
-										for i=1, dialog.words.n do
-											word = dialog.words[i]
-											-- Horizontal position
-											cur_x = cur_x + word.prespace * space_width
-											word.left = cur_x
-											word.center = word.left + word.width / 2
-											word.right = word.left + word.width
-											word.x = (dialog.styleref.alignment-1) % 3 == 0 and word.left or
-													(dialog.styleref.alignment-2) % 3 == 0 and word.center or
-													word.right
-											cur_x = cur_x + word.width + word.postspace * space_width
-											-- Vertical position
-											word.top = dialog.top
-											word.middle = dialog.middle
-											word.bottom = dialog.bottom
-											word.y = dialog.y
-										end
-									else
-										local max_width, sum_height = 0, 0
-										for i=1, dialog.words.n do
-											word = dialog.words[i]
-											max_width = math.max(max_width, word.width)
-											sum_height = sum_height + word.height
-										end
-										local cur_y, x_fix = meta.play_res_y / 2 - sum_height / 2
-										for i=1, dialog.words.n do
-											word = dialog.words[i]
-											-- Horizontal position
-											x_fix = (max_width - word.width) / 2
-											if dialog.styleref.alignment == 4 then
-												word.left = dialog.left + x_fix
-												word.center = word.left + word.width / 2
-												word.right = word.left + word.width
-												word.x = word.left
-											elseif dialog.styleref.alignment == 5 then
-												word.left = meta.play_res_x / 2 - word.width / 2
-												word.center = word.left + word.width / 2
-												word.right = word.left + word.width
-												word.x = word.center
-											else -- dialog.styleref.alignment == 6
-												word.left = dialog.right - word.width - x_fix
-												word.center = word.left + word.width / 2
-												word.right = word.left + word.width
-												word.x = word.right
-											end
-											-- Vertical position
-											word.top = cur_y
-											word.middle = word.top + word.height / 2
-											word.bottom = word.top + word.height
-											word.y = word.middle
-											cur_y = cur_y + word.height
-										end
+									local cur_x = dialog.left
+									for i=1, dialog.words.n do
+										word = dialog.words[i]
+										-- Horizontal position
+										cur_x = cur_x + word.prespace * space_width
+										word.left = cur_x
+										word.center = word.left + word.width / 2
+										word.right = word.left + word.width
+										word.x = (dialog.styleref.alignment-1) % 3 == 0 and word.left or
+												(dialog.styleref.alignment-2) % 3 == 0 and word.center or
+												word.right
+										cur_x = cur_x + word.width + word.postspace * space_width
+										-- Vertical position
+										word.top = dialog.top
+										word.middle = dialog.middle
+										word.bottom = dialog.bottom
+										word.y = dialog.y
 									end
 								end
 							end
@@ -2457,59 +2383,22 @@ Yutils = {
 								end
 								-- Calculate character positions with all characters data already available
 								if dialog.chars.n > 0 and dialog.chars[1].width and meta.play_res_x > 0 and meta.play_res_y > 0 then
-									if dialog.styleref.alignment > 6 or dialog.styleref.alignment < 4 then
-										local cur_x = dialog.left
-										for i=1, dialog.chars.n do
-											char = dialog.chars[i]
-											-- Horizontal position
-											char.left = cur_x
-											char.center = char.left + char.width / 2
-											char.right = char.left + char.width
-											char.x = (dialog.styleref.alignment-1) % 3 == 0 and char.left or
-													(dialog.styleref.alignment-2) % 3 == 0 and char.center or
-													char.right
-											cur_x = cur_x + char.width
-											-- Vertical position
-											char.top = dialog.top
-											char.middle = dialog.middle
-											char.bottom = dialog.bottom
-											char.y = dialog.y
-										end
-									else
-										local max_width, sum_height = 0, 0
-										for i=1, dialog.chars.n do
-											char = dialog.chars[i]
-											max_width = math.max(max_width, char.width)
-											sum_height = sum_height + char.height
-										end
-										local cur_y, x_fix = meta.play_res_y / 2 - sum_height / 2
-										for i=1, dialog.chars.n do
-											char = dialog.chars[i]
-											-- Horizontal position
-											x_fix = (max_width - char.width) / 2
-											if dialog.styleref.alignment == 4 then
-												char.left = dialog.left + x_fix
-												char.center = char.left + char.width / 2
-												char.right = char.left + char.width
-												char.x = char.left
-											elseif dialog.styleref.alignment == 5 then
-												char.left = meta.play_res_x / 2 - char.width / 2
-												char.center = char.left + char.width / 2
-												char.right = char.left + char.width
-												char.x = char.center
-											else -- dialog.styleref.alignment == 6
-												char.left = dialog.right - char.width - x_fix
-												char.center = char.left + char.width / 2
-												char.right = char.left + char.width
-												char.x = char.right
-											end
-											-- Vertical position
-											char.top = cur_y
-											char.middle = char.top + char.height / 2
-											char.bottom = char.top + char.height
-											char.y = char.middle
-											cur_y = cur_y + char.height
-										end
+									local cur_x = dialog.left
+									for i=1, dialog.chars.n do
+										char = dialog.chars[i]
+										-- Horizontal position
+										char.left = cur_x
+										char.center = char.left + char.width / 2
+										char.right = char.left + char.width
+										char.x = (dialog.styleref.alignment-1) % 3 == 0 and char.left or
+												(dialog.styleref.alignment-2) % 3 == 0 and char.center or
+												char.right
+										cur_x = cur_x + char.width
+										-- Vertical position
+										char.top = dialog.top
+										char.middle = dialog.middle
+										char.bottom = dialog.bottom
+										char.y = dialog.y
 									end
 								end
 							end
