@@ -3,3 +3,6 @@ tests
 
 # Local Backups
 backup
+
+# Local Plugins
+/bin/autoload
