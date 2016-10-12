@@ -77,7 +77,7 @@ wrapper = {
 				local _text, _prespace, _postspace = wrapper.trim(text)
 				local inline_fx = string.match(pre_tag .. post_tag, "\\%-([^\\]*)") or ""
 				if _prespace > 0 then c_word = c_word + 1 end
-				line.syls[c_syl].word_i = c_word
+				if line.syls[c_syl] then line.syls[c_syl].word_i = c_word end
 				if _postspace > 0 then c_word = c_word + 1 end
 				c_syl = c_syl + 1
 			end
