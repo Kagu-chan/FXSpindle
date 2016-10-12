@@ -118,6 +118,7 @@ function io.write_line(line)
 		line.text == nil or tostring(line.text) == nil then
 		error("valid table expected", 2)
 	end
+	if line.start_time >= line.end_time then return false end
 	
 	if outF then
 		outF:write(string.format("\n%s: %d,%s,%s,%s,%s,%04d,%04d,%04d,%s,%s",
