@@ -25,6 +25,16 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
 Dialogue: 0,0:00:00.00,0:00:10.00,Default,,0000,0000,0000,,Test]]
 end
 
+local function preparse_text(line)
+	line.text = line.text:gsub("{([^}]+)}", function(ass)
+		ass = ass:gsub("\\([^\\%d]+)%.(%d+)", function(func, val) return ("\\%s0.%d"):format(func, val) end)
+		ass = ass:gsub("(%d+%.%d-)0+(%D)", function(val, follow) return ("%s%s"):format(val, follow) end)
+		ass = ass:gsub("(%d+)%.(%D)", function(num, follow) return ("%s%s"):format(num, follow) end)
+		ass = ass:gsub("\\fad%(0,0%)", "")
+		return "{" .. ass .. "}"
+	end)
+end
+
 local function remove_bom_or_fail(text)
 	if 	text:match("^\254\255") or
 		text:match("^\255\254") or
@@ -119,7 +129,8 @@ function io.write_line(line)
 		error("valid table expected", 2)
 	end
 	if line.start_time >= line.end_time then return false end
-	
+	preparse_text(line)
+
 	if outF then
 		outF:write(string.format("\n%s: %d,%s,%s,%s,%s,%04d,%04d,%04d,%s,%s",
 			line.comment and "Comment" or "Dialogue",
